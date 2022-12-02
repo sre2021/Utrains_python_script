@@ -11,8 +11,13 @@ from botocore.exceptions import ClientError
 s3_client = boto3.client('s3')
 
 buckets_list = s3_client.list_buckets()
+buckets = []
 
-buckets = [bucket['Name'] for bucket in buckets_list['Buckets']]
+for bucket in buckets_list:
+    buckets.append(bucket['Name'])
+
+
+#buckets = [bucket['Name'] for bucket in buckets_list['Buckets']]
 
 def get_unencrypted_buckets():
     """ This function get a list of all s3 buckets without Encryption """
